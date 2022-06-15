@@ -1,0 +1,33 @@
+package com.revature.scanner;
+import java.util.Scanner;
+
+// by default, everything in the java.lang package is imported
+public class ScannerDriver {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.println("Hello World!");
+		System.out.println("What is your name?");
+		String name = scan.nextLine();
+		
+		System.out.println("Hello " +  name + "!");
+		
+		System.out.println("Please enter a number: ");
+		int num = scan.nextInt(); //flush leftover from the previous input capture
+		System.out.println("Your number is " + num);
+		
+		System.out.println("Please pick a number from 1-2: ");
+		String number = scan.nextLine();
+		
+		switch(number) {
+		case "1":
+			System.out.println("Hello");
+		case "2":
+			System.out.println("Goodbye");
+		default:
+			System.out.println("Not recognized");
+		}
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.revature.scopes;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		MyClass mc = new MyClass();
+		
+		System.out.println(mc.reverseString("Nikita"));
+		System.out.println(mc.reverseString("Asmaa"));
+		
+	}
+
+}

@@ -1,0 +1,18 @@
+package com.revature;
+
+public class HelloWorld {
+	
+	public static void main(String[] args) {
+		
+		System.out.println("Hello from Eclipse!");
+		
+		boolean bool = true; //1 bit
+		byte myByte = 127; //8 bits -128 to 127
+//		myByte = 128;
+		short myShort = 128; //16 bits or 2 bytes
+		char myChar = 'a'; //16 bits of memory
+		int standardDataTypeForWholeNumber = 12345; //32 bits
+		float lessPreciseDouble = 92.3f; //
+	}
+
+}
