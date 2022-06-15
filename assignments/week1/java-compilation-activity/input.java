@@ -1,16 +1,28 @@
 //import java.util.Arrays;
+//import java.util.Scanner;
 public class input{
     public static void main(String[] args){
-        input in = new input();
-        int input = in.randomNumber();
-        System.out.println(input);
-        
-    }
-    public int randomNumber() {
-        int x = (int)(Math.random()*50) + 1;
-       
-        return x;
-        
-    }
+
+        switch (args.length) {
+
+            //Get random number
+            case 1:
+            int rand = (int)(Math.random() * Integer.parseInt(args[0])) + 1; //convert int rand to random integer times int
+            System.out.println(rand);
+            break;
     
+            //Print a string x times
+            case 2:
+            int x = Integer.parseInt(args[0]); //convert the string to int
+            for (int i=0; i<x; i++) {
+                System.out.println(args[1]);
+            }
+            break;
+    
+            //Default case
+            default:
+            break;
+    
+            }
+    }
 }
