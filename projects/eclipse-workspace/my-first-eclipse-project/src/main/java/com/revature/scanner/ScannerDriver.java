@@ -77,7 +77,7 @@ public class ScannerDriver {
 		
 		while(on) { //while the program is true:
 			System.out.println("Please enter a number between 1-3. \n3 will exit you out.");
-			String x = scan.nextLine(); //use scanner method to take th euser input
+			String x = scan.nextLine(); //use scanner method to take the user input
 		switch(x) { //start a switch case to determine the logic behind the user's input
 		case "1": //if the user enters 1:
 			System.out.println("You have entered: " + x);
