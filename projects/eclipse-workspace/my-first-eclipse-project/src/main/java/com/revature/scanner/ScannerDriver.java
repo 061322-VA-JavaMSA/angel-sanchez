@@ -38,7 +38,7 @@ public class ScannerDriver {
 //		}
 		loginScreen();
 		menu();
-		//scan.close();
+		scan.close();
 	}
 
 	/*
@@ -69,20 +69,41 @@ public class ScannerDriver {
 		 * this menu should repeat until the user decides to exit
 		 */
 		
-		Scanner menu = new Scanner(System.in);
-		System.out.println("Enter a number between 1-3. 3 will exit you out.");
-		int x = menu.nextInt();
+		//Scanner menu = new Scanner(System.in);
+		boolean on = true;
 		
-		do {
-			System.out.println("You entered: " + x);
-			continue;
-		}while(x==1);
-		do {
-			System.out.println("Please enter a sentence.");
-			String.valueOf(x); 
-			System.out.println(x);
-			continue;
-		}while(x==2);
+		//String x = "";
+		
+		
+		while(on) {
+			System.out.println("Please enter a number between 1-3. \n3 will exit you out.");
+			String x = scan.nextLine();
+		switch(x) {
+		case "1":
+			System.out.println("You have entered: " + x);
+			System.out.println("Your lucky number is: " + (int)(Math.random()*1000));
+			System.out.println();
+			break;
+		case "2":
+			String reverse;
+			System.out.println("You have entered: " + x);
+			System.out.println("Enter your favorite line from a movie: ");
+			reverse = scan.nextLine();
+			StringBuilder sb = new StringBuilder(reverse);
+			System.out.println(reverse + " | Your favorite line but in reverse: " + sb.reverse());
+			System.out.println();
+			break;
+		case "3":
+			on = false;
+			System.out.println("Until next time!");
+			System.out.println();
+			break;
+		default:
+			System.out.println("Invalid Input! Please pick a number between 1-3.");
+			System.out.println();
+		}
+		}
+		
 	}
 
 }
