@@ -70,35 +70,35 @@ public class ScannerDriver {
 		 */
 		
 		//Scanner menu = new Scanner(System.in);
-		boolean on = true;
+		boolean on = true; //set a boolean to determine when to close the program/while loop
 		
 		//String x = "";
 		
 		
-		while(on) {
+		while(on) { //while the program is true:
 			System.out.println("Please enter a number between 1-3. \n3 will exit you out.");
-			String x = scan.nextLine();
-		switch(x) {
-		case "1":
+			String x = scan.nextLine(); //use scanner method to take th euser input
+		switch(x) { //start a switch case to determine the logic behind the user's input
+		case "1": //if the user enters 1:
 			System.out.println("You have entered: " + x);
 			System.out.println("Your lucky number is: " + (int)(Math.random()*1000));
 			System.out.println();
-			break;
-		case "2":
+			break; //always break in between cases so the program knows when to reiterate
+		case "2": //if the user enters 2:
 			String reverse;
 			System.out.println("You have entered: " + x);
 			System.out.println("Enter your favorite line from a movie: ");
-			reverse = scan.nextLine();
-			StringBuilder sb = new StringBuilder(reverse);
-			System.out.println(reverse + " | Your favorite line but in reverse: " + sb.reverse());
+			reverse = scan.nextLine(); //take in the user's sentence
+			StringBuilder sb = new StringBuilder(reverse); //either stringBuilder or Buffer would suffice in order to instantiate the user's line
+			System.out.println(reverse + " | Your favorite line but in reverse: " + sb.reverse()); //reverse the user's sentence with the reverse() method
 			System.out.println();
-			break;
-		case "3":
-			on = false;
+			break; //break the 2nd case
+		case "3": //if the user enters 3:
+			on = false; //at this point the program will exit when the user enters "3"
 			System.out.println("Until next time!");
 			System.out.println();
-			break;
-		default:
+			break; //final break point of the user's choice
+		default: //we include a default in case the user doesn't pick the correct number or enters an invalid input
 			System.out.println("Invalid Input! Please pick a number between 1-3.");
 			System.out.println();
 		}
