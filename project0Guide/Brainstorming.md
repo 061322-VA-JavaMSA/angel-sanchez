@@ -126,3 +126,28 @@ Need a Task
 - LopcalDate dueDate
 - Status status: new, pending, complete
 - User userAssigned
+
+
+## Main class:
+- only handle input/output
+
+## Service:
+- all business logic, authServ for username && password
+- throw an exception if it doesn't match
+- uses UserDAO as a class instance, leverages to connect to DB
+- retrieves values from UserDAO
+
+## DAO:
+- sql logic
+- postgres class
+```java
+try(COnnection c = ConnectionUtil.getConnectionFromEnv();){
+    PreparedStatement ps = c.prepareStatement(sql);
+
+    ps.setString(1, username);
+
+    ResultSet rs = ps.executeQuery();
+
+
+}
+```
