@@ -12,6 +12,7 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	private boolean isAdmin;
 	
 	public User() { //declare User method as parent
 		super();
@@ -58,6 +59,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public boolean getAdmin() {
+		return isAdmin;
+	}
 
 	@Override
 	public int hashCode() {
@@ -68,10 +73,13 @@ public class User {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+		
 		if (obj == null)
 			return false;
+		
 		if (getClass() != obj.getClass())
 			return false;
+		
 		User other = (User) obj;
 		return id == other.id && Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}

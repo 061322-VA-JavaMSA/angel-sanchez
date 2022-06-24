@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import java.io.IOException;
+
 import javax.security.auth.login.LoginException;
 
 import com.revature.DAO.UserDAO;
@@ -20,6 +22,16 @@ public class AuthService {
 			throw new LoginException();
 		}
 		return u;
+	}
+	
+	public boolean checkAdmin(String username) throws IOException{
+		User u = ud.retrieveUserByUsername(username);
+		return u.getAdmin();
+	}
+	
+	public int checkId(String username) throws IOException{
+		User u = ud.retrieveUserByUsername(username);
+		return u.getId();
 	}
 
 }

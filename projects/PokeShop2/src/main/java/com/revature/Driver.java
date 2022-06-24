@@ -1,5 +1,7 @@
 package com.revature;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -12,8 +14,12 @@ import javax.security.auth.login.LoginException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.models.Offers;
+import com.revature.models.Pokemon;
 import com.revature.models.User;
 import com.revature.services.AuthService;
+import com.revature.services.PokeOfferService;
+import com.revature.services.PokemonService;
 import com.revature.services.UserService;
 
 public class Driver {
@@ -21,16 +27,22 @@ public class Driver {
 	static Scanner scan;
 	static AuthService as;
 	static UserService us;
+	static PokemonService ps;
+	static PokeOfferService pos;
 	
-	static String username;
-	static String password;
+	static String username = null;
+	static String password = null;
+	
+	static int userId;
 	
 	private static Logger log = LogManager.getLogger(Driver.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException, IOException {
 		scan = new Scanner(System.in);
 		as = new AuthService();
 		us = new UserService();
+		ps = new PokemonService();
+		pos = new PokeOfferService();
 		boolean in = true;
 		//		menus, will greet, then ask to login/register
 		
@@ -41,65 +53,226 @@ public class Driver {
 		System.out.println("What would you like to start with? \n 1: Login? \n 2: Register?");
 		int input = scan.nextInt();
 		
-		while(in) {
 			switch(input) {
 			case 1:
-				Login();
 				System.out.println("Congratulations on becoming a Pokemon Trainer!");
-				System.out.println("We have to get you started, please choose any of the following from our inventory: ");
+				System.out.println("Please enter your username: ");
+				username = scan.next();
+				
+				System.out.println();
+				
+				System.out.println("Please enter your password: ");
+				password = scan.next();
 				break;
 			case 2:
-				Register();
+				System.out.println("Let's get you started. Please enter a username for your trainer: ");
+				String uname = scan.next();
+				System.out.println("Now enter a password for security: ");
+				String pass = scan.next();
+				
+				User newUser = new User();
+				newUser.setUsername(uname);
+				newUser.setPassword(pass);
+				
+				System.out.println(us.createUser(newUser));
+				username = uname;
+				password = pass;
 				break;
 			default:
 				System.out.println("Please enter a valid Integer.");
 			}
 			
-		}
 		
+		Login(username, password);
 		
 		scan.close();
 	}
 	
-	public static void Login() {
-		System.out.println("Enter your username: ");
-		username = scan.nextLine();
-		System.out.println("Enter your password: ");
-		password = scan.nextLine();
-		
+	public static void Login(String username, String password) throws SQLException, IOException{
 		try {
 			log.info(as.login(username, password));
 		} catch (LoginException e) {
 			log.error("Invalid credentials.");
-			e.printStackTrace();
+			System.exit(0);
+//			e.printStackTrace();
+		}
+		
+		userId = as.checkId(username);
+		if(as.checkAdmin(username) == false) {
+			menu();
+		} else {
+			adminMenu();
 		}
 		
 	}
 	
-	public static void Register() {
-		List<User> users = us.getUsers();
-		for(User u : users) {
-			System.out.println(u);
+	private static void adminMenu() throws SQLException, IOException{
+		// TODO Auto-generated method stub
+		
+		System.out.println("Running as Manager.");
+		System.out.println("Enter 1 to remove a pokemon. \n Enter 2 to add a pokemon. \n Enter 3 to see all offers.");
+		
+		switch(scan.nextInt()) {
+		case 1:
+			deletePokemon();
+			adminMenu();
+			break;
+		case 2:
+			addPokemon();
+			adminMenu();
+			break;
+		case 3:
+			checkOffers();
+		default:
+			adminMenu();
+			break;
+		};
+		
+	}
+
+	private static void checkOffers() throws SQLException, IOException{
+		// TODO Auto-generated method stub
+		
+		int offerID;
+		String status;
+		
+		List<Offers> Offers = pos.getOffers();
+		for(Offers o : Offers) {
+			System.out.println(o);
 		}
 		
-		User newUser = new User();
-		System.out.println("Thank you for choosing us as your PokeTutor! Register: ");
+		System.out.println("Enter the ID for the offer you are concluding.");
+		offerID = scan.nextInt();
+		System.out.println("Enter the status for the offer: Approve or Deny. Otherwise, will default to pending.");
+		status = scan.nextLine();
+		Offers of = new Offers();
+		of.setOfferId(offerID);
+		of.setStatus(status);
+		pos.ChangeOfferStatus(of);
 		
-		System.out.println("Please enter a username for your trainer: ");
-		String uname = scan.nextLine();
-		
-		System.out.println();
-		
-		System.out.println("Please enter a password for your trainer: ");
-		String pass = scan.nextLine();
-		
-		newUser.setUsername(uname);
-		newUser.setPassword(pass);
-		
-		log.info(us.createUser(newUser));
-		
-		User createdUser = us.createUser(newUser);
-		System.out.println("Trainer: " + createdUser + "has been created.");
 	}
+
+	private static void deletePokemon(){
+		// TODO Auto-generated method stub
+		
+		try {
+			listPokemon();
+			System.out.println("Type the Pokemon's id to delete.");
+			ps.deletePokemon(scan.nextInt());
+		} catch(SQLException e){
+			e.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private static void addPokemon() throws SQLException, IOException{
+		// TODO Auto-generated method stub
+		String PokeName;
+		int price;
+		
+		System.out.println("Enter the name of the Pokemon to add: ");
+		PokeName = scan.nextLine();
+		System.out.println("Enter the price of the new Pokemon: ");
+		price = scan.nextInt();
+		
+		Pokemon addPokemon = new Pokemon();
+		
+		addPokemon.setpName(PokeName);
+		addPokemon.setPrice(price);
+		
+		System.out.println(ps.createPokemon(addPokemon));
+		System.out.println("Congratulations on adding " + PokeName + "!");
+		
+	}
+
+	private static void menu() throws SQLException, IOException{
+		// TODO Auto-generated method stub
+		System.out.println("Welcome to the beginning of your Pokemon journey!");
+		System.out.println("Please enter any of the following numbers: ");
+		System.out.println("1: View Inventory");
+		System.out.println("2: Create an Offer: ");
+		System.out.println("3: Make a Payment: ");
+		
+		switch(scan.nextInt()) {
+		case 1:
+			listPokemon();
+			menu();
+			break;
+		case 2:
+			payment();
+			break;
+		case 3:
+			makeOffer();
+			break;
+		default:
+			menu();
+			break;
+		}
+		
+	}
+
+	private static void makeOffer() throws SQLException, IOException{
+		// TODO Auto-generated method stub
+		
+		int PokemonId;
+		int amount;
+		Pokemon p = new Pokemon();
+		
+		listPokemon();
+		System.out.println("Enter the pokemon's id you would like to purchase.");
+		PokemonId = scan.nextInt();
+		System.out.println("Enter the offer you would like to make.");
+		amount = scan.nextInt();
+		
+		p.setpId(PokemonId);
+		p.setOffer(amount);
+		p.setUserId(userId);
+		ps.makeOffer(p);
+		
+		System.out.println("Offer created. Please wait by the end of the week for a response.");
+		
+	}
+
+	private static void payment() throws SQLException, IOException{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void listPokemon() throws SQLException, IOException {
+		// TODO Auto-generated method stub
+		
+		List<Pokemon> pokemon = ps.getPokemon();
+		for(Pokemon p : pokemon) {
+			System.out.println(p);
+		}
+		
+	}
+
+//	public static void Register() {
+//		List<User> users = us.getUsers();
+//		for(User u : users) {
+//			System.out.println(u);
+//		}
+//		
+//		
+//		System.out.println("Thank you for choosing us as your PokeTutor! Register: ");
+//		
+//		System.out.println("Please enter a username for your trainer: ");
+//		String uname = scan.nextLine();
+//		
+//		System.out.println();
+//		
+//		System.out.println("Please enter a password for your trainer: ");
+//		String pass = scan.nextLine();
+//		
+//		
+//		
+//		log.info(us.createUser(newUser));
+//		
+//		User createdUser = us.createUser(newUser);
+//		System.out.println("Trainer: " + createdUser + "has been created.");
+//	}
 
 }
