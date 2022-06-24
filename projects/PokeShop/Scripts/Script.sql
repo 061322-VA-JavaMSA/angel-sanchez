@@ -10,7 +10,7 @@ create table if not exists pokemon(
 p_id serial primary key,
 p_name varchar(256),
 description varchar(256),
-owner_id int references users(user_id)
+owner_id int references users(id)
 );
 
 create table if not exists payment(
@@ -24,7 +24,7 @@ owner_id int references users(id)
 create table if not exists offers(
 offer_id serial primary key,
 status varchar(256) default 'pending',
-item_id references pokemon(p_id),
+item_id int references pokemon(p_id),
 amount money not null,
 user_id integer references users(id)
 );
