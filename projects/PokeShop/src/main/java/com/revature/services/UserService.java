@@ -7,6 +7,7 @@ import com.revature.models.User;
 
 public class UserService {
 	private UserDAO ud = new UserPostgres();
+	private static Logger log = LogManager.getLogger(UserService.class);
 	
 	public List<User> getUsers(){
 		return ud.retrieveUsers();

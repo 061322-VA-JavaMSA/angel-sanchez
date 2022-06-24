@@ -1,7 +1,9 @@
 package com.revature;
 
 import java.util.List;
+
 import java.util.Scanner;
+
 
 // import com.revature.exceptions.LoginException;
 import javax.security.auth.login.LoginException;
@@ -24,6 +26,7 @@ public class Driver {
 		as = new AuthService();
 		us = new UserService();
 		boolean in = true;
+		private static
 //		menus, will greet, then ask to login/register
 		System.out.println("Hello! Welcome to the PokeShop! What is your name?");
 		
@@ -64,9 +67,9 @@ public class Driver {
 		password = scan.nextLine();
 		
 		try {
-			System.out.println(as.login(username, password));
+			log.info(as.login(username, password));
 		} catch (LoginException e) {
-			System.out.println("Invalid credentials.");
+			log.error("Invalid credentials.");
 			e.printStackTrace();
 		}
 		
