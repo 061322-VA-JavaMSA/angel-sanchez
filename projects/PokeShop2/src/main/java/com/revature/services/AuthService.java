@@ -11,7 +11,7 @@ import com.revature.models.User;
 public class AuthService {
 	private UserDAO ud = new UserPostgres();
 	
-	public User login(String username, String password) throws LoginException{
+	public User login(String username, String password) throws LoginException, IOException{
 		//if username/password passed are null, throws an exception
 		if(username == null || password == null) {
 			throw new LoginException();

@@ -1,13 +1,11 @@
 package com.revature.DAO;
 import java.util.List;
+
 import com.revature.models.User;
+import java.io.IOException;
 
 public interface UserDAO {
-	User createUser(User u);
-	User retrieveUserById(int id);
-	List<User> retrieveUsers();
-	User retrieveUserByUsername(String username);
-	boolean updateUser(User u);
-	boolean deleteUserById(int id);
+	User createUser(User u) throws IOException;
+	User retrieveUserByUsername(String username) throws IOException;
 
 }

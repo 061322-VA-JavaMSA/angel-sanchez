@@ -63,6 +63,9 @@ public class User {
 	public boolean getAdmin() {
 		return isAdmin;
 	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
 	@Override
 	public int hashCode() {
