@@ -16,11 +16,12 @@ public class PokemonPostgres implements PokemonDAO{
 
 	@Override
 	public Pokemon createPokemon(Pokemon p) throws IOException {
-		String sql = "insert into pokemon (p_name, price) values (?,?) returning item_id;";
-		try(Connection c = ConnectionUtil.getConnectionFromFile()){
+		String sql = "insert into pokemon (p_name, price, description) values (?,?,?) returning p_id;";
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setString(1, p.getpName());
 			ps.setInt(2, p.getPrice());
+			ps.setString(3, p.getDescription());
 			
 			ResultSet rs = ps.executeQuery(); 
 			if(rs.next()) {
@@ -37,17 +38,19 @@ public class PokemonPostgres implements PokemonDAO{
 	@Override
 	public List<Pokemon> retrievePokemon() throws SQLException, IOException {
 		// TODO Auto-generated method stub
-		String sql = "select * from pokemon;";
+		// retrieving all pokemon from the pokemon table
+		String sql = "select * from pokemon order by p_id;";
 		List<Pokemon> pokemon = new ArrayList<>();
 		
-		try(Connection c = ConnectionUtil.getConnectionFromFile();) {
-			Statement s = (Statement) c.createStatement();
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()) {
+			java.sql.Statement s = c.createStatement();
 			ResultSet rs = ((java.sql.Statement) s).executeQuery(sql);
 			while(rs.next()) {
 				Pokemon p = new Pokemon();
-				p.setOwnerId(rs.getInt("owner_id"));
+				p.setpId(rs.getInt("p_id"));
 				p.setpName(rs.getString("p_name"));
 				p.setPrice(rs.getInt("price"));
+				p.setOwnerId(rs.getInt("owner_id"));
 				pokemon.add(p);
 			}
 			
@@ -60,7 +63,7 @@ public class PokemonPostgres implements PokemonDAO{
 	public boolean deletePokemon(int id) throws IOException {
 		String sql = "delete from pokemon where p_id = ?;";
 		int rowsChanged = -1;
-		try(Connection c = ConnectionUtil.getConnectionFromFile()){
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
 			PreparedStatement ps = c.prepareStatement(sql);
 			
 			ps.setInt(1, id);
@@ -81,7 +84,7 @@ public class PokemonPostgres implements PokemonDAO{
 	public Pokemon makeAnOffer(Pokemon p) throws IOException {
 		String sql = "insert into offers (user_id, item_id, amount) values (?,?,?) returning offer_id;";
 		
-		try(Connection c = ConnectionUtil.getConnectionFromFile()){
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, p.getUserId());
 			ps.setInt(2, p.getpId());

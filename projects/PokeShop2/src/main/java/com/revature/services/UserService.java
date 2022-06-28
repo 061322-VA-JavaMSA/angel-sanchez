@@ -25,5 +25,10 @@ public class UserService {
 		log.info("User: " + user + "has been created.");
 		return user;
 	}
-
+	
+	public User retrieveById(int id) throws IOException{
+		User u = ud.retrieveUserById(id);
+		System.out.println("User id: " + u);
+		return u;
+		}
 }

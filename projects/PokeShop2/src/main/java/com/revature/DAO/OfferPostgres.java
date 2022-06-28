@@ -17,7 +17,7 @@ public class OfferPostgres implements OffersDAO{
 		String sql = "select * from offers;";
 		List<Offers> offers = new ArrayList<>();
 		
-		try(Connection c = ConnectionUtil.getConnectionFromFile();) {
+		try(Connection c = ConnectionUtil.getConnectionFromEnv();) {
 			Statement s = c.createStatement();
 			ResultSet rs = s.executeQuery(sql);
 			while(rs.next()) {

@@ -3,11 +3,11 @@ create table if not exists users(
 id serial primary key,
 username varchar(256) unique not null check(length(username)>2),
 password varchar(256) not null,
-user_role varchar(256)
+isAdmin boolean
 );
 
 create table if not exists pokemon(
-p_id int primary key,
+p_id serial primary key,
 p_name varchar(256),
 description varchar(256),
 owner_id int references users(id)
@@ -31,17 +31,21 @@ user_id integer references users(id)
 
 
 
-insert into users (username, password, user_role) values ('Asanchez', 'pass', 'manager');
-insert into users (username, password, user_role) values ('AshKetchup', 'pikachu', 'customer');
-insert into users (username, password, user_role) values ('R3D', 'snorlax', 'employee');
+insert into users (username, password, isAdmin) values ('Asanchez', 'pass', 'True');
+insert into users (username, password, isAdmin) values ('AshKetchup', 'pikachu', 'False');
+insert into users (username, password, isAdmin) values ('R3D', 'snorlax', 'False');
 
 
 insert into pokemon(p_id, p_name, description, price) values (1, 'bulbusaur', 'Grass-type, looks like a flower with a bulb on its back', '25');
 insert into pokemon(p_id, p_name, description, price) values (2, 'squirtle', 'Water-type, looks like a turtle', '10');
 insert into pokemon(p_id, p_name, description, price) values (3, 'charmander', 'Fire-type, fire breathing lizard', '50');
 
+insert into offers(status, item_id, amount, user_id) values ('Approved', 1, 25, 2);
+
 
 alter table pokemon 
 add price integer;
 
 drop table if exists pokemon cascade;
+
+drop table if exists users cascade;

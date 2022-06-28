@@ -43,7 +43,6 @@ public class Driver {
 		us = new UserService();
 		ps = new PokemonService();
 		pos = new PokeOfferService();
-		boolean in = true;
 		//		menus, will greet, then ask to login/register
 		
 		System.out.println("Welcome to the PokeShop! What is your name?");
@@ -69,10 +68,13 @@ public class Driver {
 				String uname = scan.next();
 				System.out.println("Now enter a password for security: ");
 				String pass = scan.next();
+				System.out.println("Will you be managing? T or F?");
+				boolean in = scan.hasNextBoolean();
 				
 				User newUser = new User();
 				newUser.setUsername(uname);
 				newUser.setPassword(pass);
+				newUser.setAdmin(in);
 				
 				System.out.println(us.createUser(newUser));
 				username = uname;
@@ -171,19 +173,24 @@ public class Driver {
 		// TODO Auto-generated method stub
 		String PokeName;
 		int price;
+		String description;
 		
 		System.out.println("Enter the name of the Pokemon to add: ");
-		PokeName = scan.nextLine();
-		System.out.println("Enter the price of the new Pokemon: ");
+		PokeName = scan.next();
+		System.out.println("Enter the price of the new Pokemon as an Integer: ");
 		price = scan.nextInt();
+		System.out.println("Enter the any info on the pokemon: ");
+		description = scan.next();
 		
 		Pokemon addPokemon = new Pokemon();
 		
 		addPokemon.setpName(PokeName);
 		addPokemon.setPrice(price);
+		addPokemon.setDescription(description);
 		
 		System.out.println(ps.createPokemon(addPokemon));
 		System.out.println("Congratulations on adding " + PokeName + "!");
+		
 		
 	}
 
@@ -201,15 +208,16 @@ public class Driver {
 			menu();
 			break;
 		case 2:
-			payment();
+			makeOffer();
 			break;
 		case 3:
-			makeOffer();
+			payment();
 			break;
 		default:
 			menu();
 			break;
 		}
+		
 		
 	}
 

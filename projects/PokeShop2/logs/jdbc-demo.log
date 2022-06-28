@@ -1,0 +1,3 @@
+01:01:13 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+01:03:17 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+01:04:12 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
