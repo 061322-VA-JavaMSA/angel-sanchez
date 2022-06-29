@@ -26,7 +26,7 @@ offer_id serial primary key,
 status varchar(256) default 'pending',
 p_id int,
 amount int,
-user_id integer references users(id)
+user_id int
 );
 
 
@@ -36,7 +36,7 @@ insert into users (username, password, isAdmin) values ('AshKetchup', 'pikachu',
 insert into users (username, password, isAdmin) values ('R3D', 'snorlax', 'False');
 
 
-insert into pokemon(p_id, p_name, description, price) values (1, 'bulbusaur', 'Grass-type, looks like a flower with a bulb on its back', '25');
+insert into pokemon(p_id, p_name, description, price, owner_id) values (1, 'bulbusaur', 'Grass-type, looks like a flower with a bulb on its back', '25', 2);
 insert into pokemon(p_id, p_name, description, price) values (2, 'squirtle', 'Water-type, looks like a turtle', '10');
 insert into pokemon(p_id, p_name, description, price) values (3, 'charmander', 'Fire-type, fire breathing lizard', '50');
 

@@ -88,3 +88,9 @@
 22:48:47 [main] INFO  com.revature.services.PokeOfferService - Your offer Offers [offerId=8, status=null, pId=0, amount=0, userId=0] has been taken in.
 22:50:27 [main] INFO  com.revature.Driver - User [id=3, username=R3D, password=snorlax]
 22:50:36 [main] INFO  com.revature.services.PokeOfferService - Your offer Offers [offerId=2, status=null, pId=2, amount=10, userId=3] has been taken in.
+23:32:56 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+23:34:18 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+23:43:51 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+23:59:20 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+00:00:06 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+00:05:46 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]

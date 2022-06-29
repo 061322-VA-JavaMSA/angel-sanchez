@@ -21,6 +21,7 @@ import com.revature.services.AuthService;
 import com.revature.services.PokeOfferService;
 import com.revature.services.PokemonService;
 import com.revature.services.UserService;
+import com.revature.views.UserView;
 
 public class Driver {
 	
@@ -29,6 +30,8 @@ public class Driver {
 	static UserService us;
 	static PokemonService ps;
 	static PokeOfferService pos;
+	static UserView uv;
+	static User u;
 	
 	static String username = null;
 	static String password = null;
@@ -212,9 +215,9 @@ public class Driver {
 		// TODO Auto-generated method stub
 		System.out.println("Welcome to the beginning of your Pokemon journey!");
 		System.out.println("Please enter any of the following numbers: ");
-		System.out.println("1: View Inventory");
+		System.out.println("1: View OUR Inventory!");
 		System.out.println("2: Create an Offer: ");
-//		System.out.println("3: Make a Payment: ");
+		System.out.println("3: View YOUR Inventory!: ");
 		
 //		listPokemon();
 		
@@ -226,15 +229,20 @@ public class Driver {
 		case 2:
 			makeOffer();
 			break;
-//		case 3:
-//			payment();
-//			break;
+		case 3:
+			UserInventory();
+			break;
 		default:
 			menu();
 			break;
 		}
 		
 		
+	}
+
+	private static void UserInventory() throws SQLException, IOException {
+		// TODO Auto-generated method stub
+		uv.UserInput(u.getId());
 	}
 
 	private static void makeOffer() throws SQLException, IOException{
