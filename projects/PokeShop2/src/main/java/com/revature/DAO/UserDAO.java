@@ -8,5 +8,6 @@ public interface UserDAO {
 	User createUser(User u) throws IOException;
 	User retrieveUserByUsername(String username) throws IOException;
 	User retrieveUserById(int id) throws IOException;
+	List<User> retrieveUsers() throws IOException;
 
 }

@@ -24,8 +24,8 @@ owner_id int references users(id)
 create table if not exists offers(
 offer_id serial primary key,
 status varchar(256) default 'pending',
-item_id int references pokemon(p_id),
-amount int not null,
+p_id int,
+amount int,
 user_id integer references users(id)
 );
 
@@ -40,12 +40,19 @@ insert into pokemon(p_id, p_name, description, price) values (1, 'bulbusaur', 'G
 insert into pokemon(p_id, p_name, description, price) values (2, 'squirtle', 'Water-type, looks like a turtle', '10');
 insert into pokemon(p_id, p_name, description, price) values (3, 'charmander', 'Fire-type, fire breathing lizard', '50');
 
-insert into offers(status, item_id, amount, user_id) values ('Approved', 1, 25, 2);
+insert into offers(status, p_id, amount, user_id) values ('Approved', 1, 25, 2);
 
 
 alter table pokemon 
 add price integer;
 
+alter table offers 
+add date date default current_date;
+
 drop table if exists pokemon cascade;
 
 drop table if exists users cascade;
+
+drop table if exists payment cascade;
+
+drop table if exists offers cascade;

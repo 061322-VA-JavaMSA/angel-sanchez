@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.revature.DAO.PokemonDAO;
 import com.revature.DAO.PokemonPostgres;
+import com.revature.models.Offers;
 import com.revature.models.Pokemon;
 
 public class PokemonService {
@@ -23,8 +24,5 @@ public class PokemonService {
 		return pd.deletePokemon(p);
 	}
 	
-	public Pokemon makeOffer(Pokemon p) throws IOException{
-		return pd.makeAnOffer(p);
-	}
 
 }

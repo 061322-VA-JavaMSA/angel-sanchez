@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.models.Offers;
 import com.revature.models.Pokemon;
 import com.revature.util.ConnectionUtil;
 
@@ -49,6 +50,7 @@ public class PokemonPostgres implements PokemonDAO{
 				Pokemon p = new Pokemon();
 				p.setpId(rs.getInt("p_id"));
 				p.setpName(rs.getString("p_name"));
+				p.setDescription(rs.getString("description"));
 				p.setPrice(rs.getInt("price"));
 				p.setOwnerId(rs.getInt("owner_id"));
 				pokemon.add(p);
@@ -80,25 +82,5 @@ public class PokemonPostgres implements PokemonDAO{
 		return true;
 	}
 
-	@Override
-	public Pokemon makeAnOffer(Pokemon p) throws IOException {
-		String sql = "insert into offers (user_id, item_id, amount) values (?,?,?) returning offer_id;";
-		
-		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
-			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setInt(1, p.getUserId());
-			ps.setInt(2, p.getpId());
-			ps.setInt(3, p.getPrice());
-			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
-				p.setpId(rs.getInt("offer_id"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return p;
-	}
 	
 }

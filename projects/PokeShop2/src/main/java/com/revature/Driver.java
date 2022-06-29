@@ -62,6 +62,8 @@ public class Driver {
 				
 				System.out.println("Please enter your password: ");
 				password = scan.next();
+				
+
 				break;
 			case 2:
 				System.out.println("Let's get you started. Please enter a username for your trainer: ");
@@ -76,16 +78,18 @@ public class Driver {
 				newUser.setPassword(pass);
 				newUser.setAdmin(in);
 				
-				System.out.println(us.createUser(newUser));
+				System.out.println((us).createUser(newUser));
 				username = uname;
 				password = pass;
+				
+				Register(uname, pass);
 				break;
 			default:
 				System.out.println("Please enter a valid Integer.");
 			}
 			
-		
-		Login(username, password);
+			Login(username, password);
+
 		
 		scan.close();
 	}
@@ -96,7 +100,7 @@ public class Driver {
 		} catch (LoginException e) {
 			log.error("Invalid credentials.");
 			System.exit(0);
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		userId = as.checkId(username);
@@ -120,12 +124,13 @@ public class Driver {
 			adminMenu();
 			break;
 		case 2:
-			addPokemon();
+			createPokemon(null);
 			adminMenu();
 			break;
 		case 3:
 			checkOffers();
 		default:
+			System.out.println("A decision has been made!");
 			adminMenu();
 			break;
 		};
@@ -137,6 +142,7 @@ public class Driver {
 		
 		int offerID;
 		String status;
+//		boolean one;
 		
 		List<Offers> Offers = pos.getOffers();
 		for(Offers o : Offers) {
@@ -146,7 +152,15 @@ public class Driver {
 		System.out.println("Enter the ID for the offer you are concluding.");
 		offerID = scan.nextInt();
 		System.out.println("Enter the status for the offer: Approve or Deny. Otherwise, will default to pending.");
-		status = scan.nextLine();
+		status = scan.next();
+		
+//		if(status == "Approve") {
+//			one = true;
+//		}if(status == "Deny") {
+//			one = false;
+//		}else {
+//			System.out.println("Offer will now leave as pending.");
+//		}
 		Offers of = new Offers();
 		of.setOfferId(offerID);
 		of.setStatus(status);
@@ -169,7 +183,7 @@ public class Driver {
 		
 	}
 
-	private static void addPokemon() throws SQLException, IOException{
+	private static void createPokemon(Pokemon p) throws SQLException, IOException{
 		// TODO Auto-generated method stub
 		String PokeName;
 		int price;
@@ -182,15 +196,15 @@ public class Driver {
 		System.out.println("Enter the any info on the pokemon: ");
 		description = scan.next();
 		
-		Pokemon addPokemon = new Pokemon();
+		Pokemon createPokemon = new Pokemon();
 		
-		addPokemon.setpName(PokeName);
-		addPokemon.setPrice(price);
-		addPokemon.setDescription(description);
 		
-		System.out.println(ps.createPokemon(addPokemon));
+		createPokemon.setpName(PokeName);
+		createPokemon.setPrice(price);
+		createPokemon.setDescription(description);
+		
+		System.out.println(ps.createPokemon(createPokemon));
 		System.out.println("Congratulations on adding " + PokeName + "!");
-		
 		
 	}
 
@@ -200,7 +214,9 @@ public class Driver {
 		System.out.println("Please enter any of the following numbers: ");
 		System.out.println("1: View Inventory");
 		System.out.println("2: Create an Offer: ");
-		System.out.println("3: Make a Payment: ");
+//		System.out.println("3: Make a Payment: ");
+		
+//		listPokemon();
 		
 		switch(scan.nextInt()) {
 		case 1:
@@ -210,9 +226,9 @@ public class Driver {
 		case 2:
 			makeOffer();
 			break;
-		case 3:
-			payment();
-			break;
+//		case 3:
+//			payment();
+//			break;
 		default:
 			menu();
 			break;
@@ -227,6 +243,7 @@ public class Driver {
 		int PokemonId;
 		int amount;
 		Pokemon p = new Pokemon();
+		Offers o = new Offers();
 		
 		listPokemon();
 		System.out.println("Enter the pokemon's id you would like to purchase.");
@@ -237,16 +254,16 @@ public class Driver {
 		p.setpId(PokemonId);
 		p.setOffer(amount);
 		p.setUserId(userId);
-		ps.makeOffer(p);
+		pos.makeOffer(o);
 		
 		System.out.println("Offer created. Please wait by the end of the week for a response.");
 		
 	}
 
-	private static void payment() throws SQLException, IOException{
-		// TODO Auto-generated method stub
-		
-	}
+//	private static void payment() throws SQLException, IOException{
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	private static void listPokemon() throws SQLException, IOException {
 		// TODO Auto-generated method stub
@@ -258,13 +275,16 @@ public class Driver {
 		
 	}
 
-//	public static void Register() {
-//		List<User> users = us.getUsers();
-//		for(User u : users) {
-//			System.out.println(u);
-//		}
-//		
-//		
+	public static void Register(String username, String password) throws IOException {
+		
+		
+		
+		List<User> users = us.getUsers();
+		for(User u : users) {
+			System.out.println(u);
+		}
+		
+		
 //		System.out.println("Thank you for choosing us as your PokeTutor! Register: ");
 //		
 //		System.out.println("Please enter a username for your trainer: ");
@@ -281,6 +301,6 @@ public class Driver {
 //		
 //		User createdUser = us.createUser(newUser);
 //		System.out.println("Trainer: " + createdUser + "has been created.");
-//	}
+	}
 
 }

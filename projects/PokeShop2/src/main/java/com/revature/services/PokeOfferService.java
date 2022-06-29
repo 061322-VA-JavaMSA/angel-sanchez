@@ -15,8 +15,12 @@ public class PokeOfferService {
 		return od.retrieveOffers();
 	}
 	
-	public boolean ChangeOfferStatus(Offers o) throws SQLException, IOException{
+	public Offers ChangeOfferStatus(Offers o) throws SQLException, IOException{
 		return od.updateOffer(o);
+	}
+	
+	public Offers makeOffer(Offers o) throws IOException, SQLException{
+		return od.makeAnOffer(o);
 	}
 
 }

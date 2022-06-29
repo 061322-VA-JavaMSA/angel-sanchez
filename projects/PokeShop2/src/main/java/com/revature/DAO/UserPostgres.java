@@ -63,32 +63,32 @@ public class UserPostgres implements UserDAO{
 //		return user;
 //	}
 	
-//	@Override
-//	public List<User> retrieveUsers(){
-//		String sql = "select * from users;";
-//		List<User> users = new ArrayList<>();
-//		
-//		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
-//			// no user inout taken, no need for prepared statement
-//			Statement s = c.createStatement();
-//			ResultSet rs = s.executeQuery(sql);
-//			
-//			while(rs.next()) {
-//				// extract each field from rs for each record, map them to a User object and add them to the users arrayliost
-//				User u = new User();
-//				u.setId(rs.getInt("id"));
-//				u.setUsername(rs.getString("username"));
-//				u.setPassword(rs.getString("password"));
-//				
-//				users.add(u);
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return users;
-//			}
+	@Override
+	public List<User> retrieveUsers(){
+		String sql = "select * from users;";
+		List<User> users = new ArrayList<>();
+		
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
+			// no user inout taken, no need for prepared statement
+			Statement s = c.createStatement();
+			ResultSet rs = s.executeQuery(sql);
+			
+			while(rs.next()) {
+				// extract each field from rs for each record, map them to a User object and add them to the users arrayliost
+				User u = new User();
+				u.setId(rs.getInt("id"));
+				u.setUsername(rs.getString("username"));
+				u.setPassword(rs.getString("password"));
+				
+				users.add(u);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return users;
+			}
 	
 	@Override
 	public User retrieveUserByUsername(String username) throws IOException{
