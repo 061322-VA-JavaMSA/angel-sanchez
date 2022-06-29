@@ -14,6 +14,6 @@ public interface OffersDAO {
 	
 	public Offers updateOffer(Offers o) throws SQLException, IOException;
 	
-	Offers makeAnOffer(Offers o) throws SQLException, IOException;
+	public Offers makeAnOffer(Offers o) throws SQLException, IOException;
 	
 }

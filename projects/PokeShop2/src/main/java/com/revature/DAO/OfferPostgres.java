@@ -15,7 +15,7 @@ import com.revature.util.ConnectionUtil;
 
 public class OfferPostgres implements OffersDAO{
 	
-	public List<Offers> retrieveOffers() throws SQLException, IOException {
+	public List<Offers> retrieveOffers(){
 		String sql = "select * from offers;";
 		List<Offers> offers = new ArrayList<>();
 		
@@ -39,7 +39,7 @@ public class OfferPostgres implements OffersDAO{
 	}
 
 	@Override
-	public Offers updateOffer(Offers o) throws SQLException, IOException{
+	public Offers updateOffer(Offers o){
 		String sql = "update offers set status = (?) where offer_id = (?);";
 		
 		try(Connection c = ConnectionUtil.getConnectionFromEnv()){

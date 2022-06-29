@@ -242,6 +242,7 @@ public class Driver {
 		
 		int PokemonId;
 		int amount;
+		int userId;
 		Pokemon p = new Pokemon();
 		Offers o = new Offers();
 		
@@ -250,11 +251,13 @@ public class Driver {
 		PokemonId = scan.nextInt();
 		System.out.println("Enter the offer you would like to make.");
 		amount = scan.nextInt();
+		System.out.println("Finally, enter your user id for our system organization.");
+		userId = scan.nextInt();
 		
-		p.setpId(PokemonId);
-		p.setOffer(amount);
-		p.setUserId(userId);
-		pos.makeOffer(o);
+		o.setpId(PokemonId);
+		o.setAmount(amount);
+		o.setUserId(userId);
+		pos.makeAnOffer(o);
 		
 		System.out.println("Offer created. Please wait by the end of the week for a response.");
 		
