@@ -1,6 +1,7 @@
 package com.revature;
 
 import java.io.IOException;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -14,6 +15,10 @@ import javax.security.auth.login.LoginException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.revature.DAO.PokemonDAO;
+import com.revature.DAO.PokemonPostgres;
+import com.revature.DAO.UserDAO;
+import com.revature.DAO.UserPostgres;
 import com.revature.models.Offers;
 import com.revature.models.Pokemon;
 import com.revature.models.User;
@@ -21,7 +26,6 @@ import com.revature.services.AuthService;
 import com.revature.services.PokeOfferService;
 import com.revature.services.PokemonService;
 import com.revature.services.UserService;
-import com.revature.views.UserView;
 
 public class Driver {
 	
@@ -30,8 +34,7 @@ public class Driver {
 	static UserService us;
 	static PokemonService ps;
 	static PokeOfferService pos;
-	static UserView uv;
-	static User u;
+	static User id;
 	
 	static String username = null;
 	static String password = null;
@@ -46,6 +49,7 @@ public class Driver {
 		us = new UserService();
 		ps = new PokemonService();
 		pos = new PokeOfferService();
+		
 		//		menus, will greet, then ask to login/register
 		
 		System.out.println("Welcome to the PokeShop! What is your name?");
@@ -183,6 +187,7 @@ public class Driver {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Pokemon has been deleted.");
 		
 	}
 
@@ -230,7 +235,7 @@ public class Driver {
 			makeOffer();
 			break;
 		case 3:
-			UserInventory();
+			UserInventory(userId);
 			break;
 		default:
 			menu();
@@ -240,9 +245,11 @@ public class Driver {
 		
 	}
 
-	private static void UserInventory() throws SQLException, IOException {
+	private static void UserInventory(int id) throws SQLException, IOException {
 		// TODO Auto-generated method stub
-		uv.UserInput(u.getId());
+		
+		us.displayUserPokemon();
+		
 	}
 
 	private static void makeOffer() throws SQLException, IOException{
@@ -251,7 +258,7 @@ public class Driver {
 		int PokemonId;
 		int amount;
 		int userId;
-		Pokemon p = new Pokemon();
+		
 		Offers o = new Offers();
 		
 		listPokemon();
@@ -287,8 +294,6 @@ public class Driver {
 	}
 
 	public static void Register(String username, String password) throws IOException {
-		
-		
 		
 		List<User> users = us.getUsers();
 		for(User u : users) {

@@ -49,6 +49,14 @@ add price integer;
 alter table offers 
 add date date default current_date;
 
+create view pokemon_users_join_view as select p.p_id, p.p_name, p.description, u.id as user_id, u.username
+from pokemon p
+join users u on p.owner_id = u.id;
+
+select * from pokemon_users_join_view pu;
+
+select from pokemon where owner_id = 2;
+
 drop table if exists pokemon cascade;
 
 drop table if exists users cascade;

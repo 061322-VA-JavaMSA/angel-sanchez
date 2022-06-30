@@ -16,13 +16,12 @@ public class PokemonService {
 		return pd.retrievePokemon();
 	}
 	
-	public Pokemon createPokemon(Pokemon p) throws IOException{
+	public Pokemon createPokemon(Pokemon p) throws IOException, SQLException{
 		return pd.createPokemon(p);
 	}
 	
 	public boolean deletePokemon(int p) throws IOException{
 		return pd.deletePokemon(p);
 	}
-	
 
 }

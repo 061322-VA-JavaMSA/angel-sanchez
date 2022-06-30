@@ -19,6 +19,7 @@ public class User {
 	}
 
 	/**
+	 * @param  
 	 * @return the id
 	 */
 	public int getId() {

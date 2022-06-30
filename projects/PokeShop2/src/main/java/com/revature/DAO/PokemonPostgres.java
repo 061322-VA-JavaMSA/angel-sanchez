@@ -1,6 +1,5 @@
 package com.revature.DAO;
 
-import java.beans.Statement;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,14 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.models.Offers;
 import com.revature.models.Pokemon;
 import com.revature.util.ConnectionUtil;
 
 public class PokemonPostgres implements PokemonDAO{
 
 	@Override
-	public Pokemon createPokemon(Pokemon p) throws IOException {
+	public Pokemon createPokemon(Pokemon p){
 		String sql = "insert into pokemon (p_name, price, description) values (?,?,?) returning p_id;";
 		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
 			PreparedStatement ps = c.prepareStatement(sql);
@@ -26,7 +24,7 @@ public class PokemonPostgres implements PokemonDAO{
 			
 			ResultSet rs = ps.executeQuery(); 
 			if(rs.next()) {
-				p.setpId(rs.getInt("p_id"));
+				 p.getpId();
 			}
 			
 		} catch (SQLException e) {
@@ -80,6 +78,37 @@ public class PokemonPostgres implements PokemonDAO{
 			return false;
 		}
 		return true;
+	}
+	
+	@Override
+	public List<Pokemon> retrieveUserPokemon(int id) {
+		String sql = "select * from pokemon_users_join_view pu;";
+		List<Pokemon> userPokemon = new ArrayList<>();
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = c.prepareStatement(sql);
+			
+//			ps.setInt(1, id);
+
+			
+			ResultSet rs = ps.executeQuery();
+			Pokemon p;
+					
+			while(rs.next()) {
+				p = new Pokemon();
+				
+				p.setpId(rs.getInt("p_id"));
+				p.setpName(rs.getString("p_name"));
+				p.setDescription(rs.getString("description"));
+//				p.setOwnerId(rs.getInt("owner_id"));
+				
+				userPokemon.add(p);
+						
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return userPokemon;
 	}
 
 	

@@ -10,6 +10,10 @@ public class Pokemon {
 	private int userId;
 	
 	
+	
+	public void userPokemon(int int1, String string, String string2, int int2) {
+		// TODO Auto-generated constructor stub
+	}
 	public int getpId() {
 		return pId;
 	}

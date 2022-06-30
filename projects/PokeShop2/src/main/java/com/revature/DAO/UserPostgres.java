@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.models.Pokemon;
 import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
 
@@ -38,30 +39,30 @@ public class UserPostgres implements UserDAO{
 		
 	}
 	
-//	@Override
-//	public User retrieveUserById(int id) {
-//		String sql = "select * from users where id = ?;";
-//		User user = null;
-//		
-//		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
-//			PreparedStatement ps = c.prepareStatement(sql);
-//			
-//			ps.setInt(1, id); // this refers to the 1st ? in the sql String
-//			
-//			ResultSet rs = ps.executeQuery();
-//			
-//			if(rs.next()) {
-//				user = new User();
-//				user.setId(rs.getInt("id"));
-//				user.setUsername(rs.getString("username"));
-//				user.setPassword(rs.getString("password"));
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return user;
-//	}
+	@Override
+	public User retrieveUserById(int id) {
+		String sql = "select * from users where id = ?;";
+		User user = null;
+		
+		try(Connection c = ConnectionUtil.getConnectionFromEnv()){
+			PreparedStatement ps = c.prepareStatement(sql);
+			
+			ps.setInt(1, id); // this refers to the 1st ? in the sql String
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setId(rs.getInt("id"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
 	
 	@Override
 	public List<User> retrieveUsers(){
@@ -74,7 +75,7 @@ public class UserPostgres implements UserDAO{
 			ResultSet rs = s.executeQuery(sql);
 			
 			while(rs.next()) {
-				// extract each field from rs for each record, map them to a User object and add them to the users arrayliost
+				// extract each field from rs for each record, map them to a User object and add them to the users array list
 				User u = new User();
 				u.setId(rs.getInt("id"));
 				u.setUsername(rs.getString("username"));
@@ -118,11 +119,13 @@ public class UserPostgres implements UserDAO{
 		return u;
 	}
 
-	@Override
-	public User retrieveUserById(int id) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+//	@Override
+//	public User retrieveUserById(int id) throws IOException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+	
 	
 //	@Override
 //	public boolean updateUser(User u) {
