@@ -160,3 +160,31 @@
 21:32:28 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
 21:33:26 [main] INFO  com.revature.Driver - User [id=3, username=R3D, password=snorlax]
 21:35:14 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+21:41:50 [main] INFO  com.revature.services.UserService - User: User [id=14, username=ProfOakTree, password=teacher]has been created.
+21:41:50 [main] INFO  com.revature.Driver - User [id=14, username=ProfOakTree, password=teacher]
+21:51:04 [main] INFO  com.revature.services.UserService - User: User [id=15, username=ProfOakTree, password=teacher]has been created.
+21:51:05 [main] INFO  com.revature.Driver - User [id=15, username=ProfOakTree, password=teacher]
+21:56:43 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+22:01:22 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+22:02:47 [main] INFO  com.revature.Driver - User [id=3, username=R3D, password=snorlax]
+22:03:32 [main] INFO  com.revature.services.PokeOfferService - Your offer Offers [offerId=2, status=null, pId=3, amount=50, userId=3] has been taken in.
+22:03:53 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+22:04:53 [main] INFO  com.revature.Driver - User [id=3, username=R3D, password=snorlax]
+22:05:12 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+22:07:09 [main] INFO  com.revature.services.UserService - User: User [id=4, username=ProfOakTree, password=teacher]has been created.
+22:07:09 [main] INFO  com.revature.Driver - User [id=4, username=ProfOakTree, password=teacher]
+22:08:52 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+22:19:09 [main] INFO  com.revature.services.UserService - User: User [id=5, username=Br0ck, password=Onyx]has been created.
+22:19:10 [main] INFO  com.revature.Driver - User [id=5, username=Br0ck, password=Onyx]
+22:20:45 [main] INFO  com.revature.services.UserService - User: User [id=6, username=D4wn, password=please]has been created.
+22:20:45 [main] INFO  com.revature.Driver - User [id=6, username=D4wn, password=please]
+22:21:57 [main] INFO  com.revature.services.UserService - User: User [id=7, username=LeB, password=pls]has been created.
+22:21:57 [main] INFO  com.revature.Driver - User [id=7, username=LeB, password=pls]
+22:22:25 [main] INFO  com.revature.services.UserService - User: User [id=8, username=lmao, password=piss]has been created.
+22:22:25 [main] INFO  com.revature.Driver - User [id=8, username=lmao, password=piss]
+22:25:56 [main] INFO  com.revature.services.UserService - User: User [id=4, username=Br0ck, password=Onyx]has been created.
+22:25:56 [main] INFO  com.revature.Driver - User [id=4, username=Br0ck, password=Onyx]
+22:26:21 [main] INFO  com.revature.services.UserService - User: User [id=5, username=ProOak, password=teacher]has been created.
+22:26:21 [main] INFO  com.revature.Driver - User [id=5, username=ProOak, password=teacher]
+22:30:52 [main] INFO  com.revature.services.UserService - User: User [id=6, username=D4wn, password=togepi]has been created.
+22:30:52 [main] INFO  com.revature.Driver - User [id=6, username=D4wn, password=togepi]

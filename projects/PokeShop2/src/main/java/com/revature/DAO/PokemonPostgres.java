@@ -22,7 +22,7 @@ public class PokemonPostgres implements PokemonDAO{
 			ps.setInt(2, p.getPrice());
 			ps.setString(3, p.getDescription());
 			
-			ResultSet rs = ps.executeQuery(); 
+			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				 p.getpId();
 			}

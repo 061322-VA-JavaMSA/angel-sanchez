@@ -36,9 +36,9 @@ insert into users (username, password, isAdmin) values ('AshKetchup', 'pikachu',
 insert into users (username, password, isAdmin) values ('R3D', 'snorlax', 'False');
 
 
-insert into pokemon(p_id, p_name, description, price, owner_id) values (1, 'bulbusaur', 'Grass-type, looks like a flower with a bulb on its back', '25', 2);
-insert into pokemon(p_id, p_name, description, price) values (2, 'squirtle', 'Water-type, looks like a turtle', '10');
-insert into pokemon(p_id, p_name, description, price) values (3, 'charmander', 'Fire-type, fire breathing lizard', '50');
+insert into pokemon(p_name, description, price, owner_id) values ('bulbusaur', 'Grass-type, looks like a flower with a bulb on its back', '25', 2);
+insert into pokemon(p_name, description, price) values ('squirtle', 'Water-type, looks like a turtle', '10');
+insert into pokemon(p_name, description, price) values ('charmander', 'Fire-type, fire breathing lizard', '50');
 
 insert into offers(status, p_id, amount, user_id) values ('Approved', 1, 25, 2);
 
@@ -56,6 +56,9 @@ join users u on p.owner_id = u.id;
 select * from pokemon_users_join_view pu;
 
 select from pokemon where owner_id = 2;
+delete from users where id > 3;
+
+delete from users where id > 3;
 
 drop table if exists pokemon cascade;
 

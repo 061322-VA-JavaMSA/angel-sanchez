@@ -35,6 +35,7 @@ public class Driver {
 	static PokemonService ps;
 	static PokeOfferService pos;
 	static User id;
+	static boolean isAdmin;
 	
 	static String username = null;
 	static String password = null;
@@ -77,13 +78,13 @@ public class Driver {
 				String uname = scan.next();
 				System.out.println("Now enter a password for security: ");
 				String pass = scan.next();
-				System.out.println("Will you be managing? T or F?");
-				boolean in = scan.hasNextBoolean();
+//				System.out.println("Will you be managing? T or F?");
+//				isAdmin = scan.hasNext();
 				
 				User newUser = new User();
 				newUser.setUsername(uname);
 				newUser.setPassword(pass);
-				newUser.setAdmin(in);
+//				newUser.setAdmin(isAdmin);
 				
 				System.out.println((us).createUser(newUser));
 				username = uname;
@@ -233,9 +234,12 @@ public class Driver {
 			break;
 		case 2:
 			makeOffer();
+			menu();
 			break;
 		case 3:
 			UserInventory(userId);
+			menu();
+			
 			break;
 		default:
 			menu();
