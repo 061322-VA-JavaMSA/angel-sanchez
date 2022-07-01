@@ -188,3 +188,16 @@
 22:26:21 [main] INFO  com.revature.Driver - User [id=5, username=ProOak, password=teacher]
 22:30:52 [main] INFO  com.revature.services.UserService - User: User [id=6, username=D4wn, password=togepi]has been created.
 22:30:52 [main] INFO  com.revature.Driver - User [id=6, username=D4wn, password=togepi]
+10:19:14 [main] INFO  com.revature.Driver - User [id=3, username=R3D, password=snorlax]
+10:37:20 [main] INFO  com.revature.services.UserService - User: User [id=4, username=CarMelo, password=7knicks]has been created.
+10:37:21 [main] INFO  com.revature.Driver - User [id=4, username=CarMelo, password=7knicks]
+11:07:43 [main] INFO  com.revature.services.UserService - User: User [id=0, username=AshKetchup, password=pikachu]has been created.
+11:07:43 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+11:20:51 [main] INFO  com.revature.services.UserService - User: User [id=0, username=AshKetchup, password=pikachu]has been created.
+11:20:52 [main] INFO  com.revature.Driver - User [id=2, username=AshKetchup, password=pikachu]
+11:21:16 [main] INFO  com.revature.services.UserService - User: User [id=7, username=Br0ck, password=Onyx]has been created.
+11:21:16 [main] INFO  com.revature.Driver - User [id=7, username=Br0ck, password=Onyx]
+11:22:34 [main] INFO  com.revature.services.PokeOfferService - Your offer Offers [offerId=3, status=null, pId=3, amount=40, userId=7] has been taken in.
+11:22:59 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+11:24:03 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+11:24:24 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
