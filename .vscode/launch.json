@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch TwoSum",
+            "request": "launch",
+            "mainClass": "TwoSum",
+            "projectName": ""
+        },
+        {
             "name": "Attach to Chrome",
             "port": 9222,
             "request": "attach",
@@ -17,7 +24,6 @@
             "type": "chrome",
             "url": "http://localhost:8080",
             "webRoot": "${workspaceFolder}"
-        },
-
+        }
     ]
 }
