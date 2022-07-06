@@ -58,4 +58,11 @@ public class AuthServlet extends HttpServlet{
 		
 		session.invalidate();
 	}
+	
+	//to prevent CORS preflight issue
+	@Override
+	protected void doOptions(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+		CorsFix.AddCorsHeader(req.getRequestURI(), res);
+		super.doOptions(req, res);
+	}
 }

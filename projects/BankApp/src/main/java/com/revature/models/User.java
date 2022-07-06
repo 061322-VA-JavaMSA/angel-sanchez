@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+//using object mapping for users table
 @Entity
 @Table(name="users")
 public class User {

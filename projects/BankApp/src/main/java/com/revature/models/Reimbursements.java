@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+//using object mapping for tables
 @Entity
 @Table(name="reimbursement")
 public class Reimbursements {
