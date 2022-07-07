@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.time.LocalDate;
+
 import java.util.Objects;
 
 import jakarta.persistence.Column;
