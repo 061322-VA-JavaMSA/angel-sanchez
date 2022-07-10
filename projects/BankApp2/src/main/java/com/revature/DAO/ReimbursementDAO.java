@@ -3,6 +3,7 @@ package com.revature.DAO;
 import java.util.List;
 
 import com.revature.Models.Reimbursement;
+import com.revature.Models.User;
 
 public interface ReimbursementDAO {
 	Reimbursement insertReimbursement(Reimbursement r);
@@ -14,5 +15,7 @@ public interface ReimbursementDAO {
 	Reimbursement updateReimbursement(Reimbursement r);
 	
 	List<Reimbursement> getReimbursementByStatus(Reimbursement rs);
+	
+	List<Reimbursement> getReimbursementByAuthor(User u);
 
 }

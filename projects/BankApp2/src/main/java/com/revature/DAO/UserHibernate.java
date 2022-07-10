@@ -11,11 +11,14 @@ import com.revature.utils.HibernateUtil;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 public class UserHibernate implements UserDAO{
 
+	@SuppressWarnings("deprecation")
+	@Override
 	public User insertUser(User u) {
 		// TODO Auto-generated method stub
 //		u.setId(-1);
@@ -30,6 +33,7 @@ public class UserHibernate implements UserDAO{
 		return u;
 	}
 
+	@Override
 	public User getUserById(int id) {
 		// TODO Auto-generated method stub
 		User u = null;
@@ -41,6 +45,7 @@ public class UserHibernate implements UserDAO{
 		return u;
 	}
 
+	@Override
 	public User getUserByUsername(String username) {
 		// TODO Auto-generated method stub
 		User u = null;
@@ -59,6 +64,7 @@ public class UserHibernate implements UserDAO{
 		return u;
 	}
 
+	@Override
 	public List<User> getUsers() {
 		// TODO Auto-generated method stub
 		List<User> users = null;
@@ -68,6 +74,34 @@ public class UserHibernate implements UserDAO{
 		}
 
 		return users;
+	}
+
+	@SuppressWarnings({ "deprecation", "unused" })
+	@Override
+	public boolean updateUser(User u) {
+		int rowsChanged = -1;
+		try (Session s = HibernateUtil.getSessionFactory().openSession()) {
+			Transaction trans = s.beginTransaction();
+
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaUpdate<User> cu = cb.createCriteriaUpdate(User.class);
+			Root<User> root  = cu.from(User.class);
+			String passwordString = u.getPassword();
+			
+			cu.set(root.get("first_name"), u.getFirstName());
+			cu.set(root.get("last_name"), u.getLastName());
+			cu.set(root.get("email"), u.getEmail());
+			
+			if(passwordString != null && !passwordString.isEmpty()) {
+				cu.set(root.get("password"), passwordString);
+			}
+			cu.where(cb.equal(root.get("id"),u.getId()));
+ 			rowsChanged =s.createQuery(cu).executeUpdate();
+			if (rowsChanged < 1) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
