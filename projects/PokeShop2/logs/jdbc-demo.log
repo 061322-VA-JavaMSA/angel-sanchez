@@ -201,3 +201,7 @@
 11:22:59 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
 11:24:03 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
 11:24:24 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
+21:18:20 [main] INFO  com.revature.services.UserService - User: User [id=8, username=asanchez, password=emelita]has been created.
+21:18:21 [main] INFO  com.revature.Driver - User [id=8, username=asanchez, password=emelita]
+21:20:36 [main] INFO  com.revature.services.PokeOfferService - Your offer Offers [offerId=4, status=null, pId=3, amount=50, userId=8] has been taken in.
+21:21:50 [main] INFO  com.revature.Driver - User [id=1, username=Asanchez, password=pass]
