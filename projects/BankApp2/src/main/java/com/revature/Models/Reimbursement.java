@@ -27,7 +27,7 @@ public class Reimbursement {
 	private int amount;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column
+	@Column(nullable = false)
 	private Timestamp submitted;
 	
 	@Temporal(TemporalType.TIMESTAMP)

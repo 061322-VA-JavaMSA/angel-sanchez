@@ -33,8 +33,12 @@ async function login(){
             Session Storage only allows persistence of Strings so the JS Object is converted to a JSON string using JSON.stringify
          */
          sessionStorage.setItem('principal', JSON.stringify(data));
+         if(data.role === "Manager"){
+            window.location.href="/FrontEnd/Jscripts/manager_reim.html";
+         } else{
         // redirect to the homepage on success
-        window.location.href="./index.html";
+        window.location.href="/FrontEnd/Jscripts/new_reim.html";
+         }
     } else{
         console.log('Unable to login.')
     }

@@ -119,4 +119,16 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+//	@Override
+//	protected void doPut(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+//		CorsFix.AddCorsHeader(req.getRequestURI(), res);
+//		InputStream reqBody = req.getInputStream();
+//		String path = req.getPathInfo();
+//		int id = Integer.parseInt(path.substring(1));
+//		User u = om.readValue(reqBody, User.class);
+//		u.setId(id);
+//		HttpSession session = req.getSession();
+//		if()
+//	}
 }

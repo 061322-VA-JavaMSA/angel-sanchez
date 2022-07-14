@@ -10,7 +10,11 @@ public class ConnectionUtil {
 	private static Connection c;
 
 	public static Connection getConnectionFromEnv() throws SQLException, IOException {
-		
+		try {
+			Class.forName("org.postgressql.Driver");
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		String url = System.getenv("DB_url");
 		String username = System.getenv("DB_username");

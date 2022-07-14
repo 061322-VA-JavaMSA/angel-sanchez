@@ -1,5 +1,5 @@
 // Because main.js is the first script added to each HTML page, the logic declared here is shared/reused by all pages
-let apiUrl = 'http://localhost:8080/task-manager';
+let apiUrl = 'http://localhost:8080/BankApp2';
 
 // When logged in, retrieves the JSON string representing the logged in user from Session Storage
 let principalString = sessionStorage.getItem('principal');
@@ -13,15 +13,15 @@ if (principalString) {
     // converts the JSON string back to a JS object and assigns it to principal
     principal = JSON.parse(principalString);
 
-    if (principal.role === 'ADMIN') {
+    if (principal.role === 'Manager') {
         createNavElement('Users', nav_left, './users.html', null);
     }
 
-    createNavElement('Tasks', nav_left, './tasks.html', null);
+    createNavElement('Reimbursements', nav_left, './reim.html', null);
 
     createNavElement('Logout', nav_right, null, logout);
 } else {
-    createNavElement('Login', nav_right, './login.html', null);
+    createNavElement('Login', nav_right, './Login.html', null);
 }
 
 async function logout() {
@@ -71,4 +71,26 @@ function createNavElement(innerHTML, parentElement, link, callback) {
     li.appendChild(a);
 
     parentElement.appendChild(li);
+}
+
+function formatDate(timestamp, split) {
+    let date = new Date(timestamp);
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let min = date.getMinutes();
+    let sec = date.getSeconds();
+    let amPm = hour < 12 ? "AM" : "PM";
+    if (hour > 12) {
+        hour -= 12;
+    }
+    month = (month < 10 ? "0" : "") + month;
+    day = (day < 10 ? "0" : "") + day;
+    hour = (hour < 10 ? "0" : "") + hour;
+    min = (min < 10 ? "0" : "") + min;
+    sec = (sec < 10 ? "0" : "") + sec;
+
+    let str = month + "-" + day + "-" + date.getFullYear() + split +  hour + ":" + min + ":" + sec + " " + amPm;
+
+    return str;
 }

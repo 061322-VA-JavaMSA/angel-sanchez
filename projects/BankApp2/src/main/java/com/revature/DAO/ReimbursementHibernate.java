@@ -1,11 +1,14 @@
 package com.revature.DAO;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 
+import com.revature.Models.R_status;
 import com.revature.Models.Reimbursement;
 import com.revature.Models.User;
 import com.revature.utils.HibernateUtil;
@@ -64,12 +67,22 @@ public class ReimbursementHibernate implements ReimbursementDAO{
 	}
 
 	@Override
-	public Reimbursement updateReimbursement(Reimbursement r) {
+	public boolean updateReimbursement(Reimbursement r) throws IOException {
 		// TODO Auto-generated method stub
 		try(Session s = HibernateUtil.getSessionFactory().getCurrentSession()){
-			
+			Transaction tx = s.beginTransaction();
+			Reimbursement ur = (Reimbursement) s.get(Reimbursement.class, r.getId());
+			System.out.println(ur);
+			ur.setStatus_id(r.getStatus_id());
+			ur.setResolver(r.getResolver());
+			System.out.println(ur);
+			s.merge(ur);
+			tx.commit();
+			return true;
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return false;
 		}
-		return null;
 	}
 
 	@Override
@@ -111,6 +124,12 @@ public class ReimbursementHibernate implements ReimbursementDAO{
 		}
 				
 		return auth_reim;
+	}
+
+	@Override
+	public Object setStatusById(int userID, User approverUser, R_status rs) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

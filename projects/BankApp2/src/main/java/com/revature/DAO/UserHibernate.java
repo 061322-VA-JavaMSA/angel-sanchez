@@ -17,7 +17,6 @@ import jakarta.persistence.criteria.Root;
 
 public class UserHibernate implements UserDAO{
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public User insertUser(User u) {
 		// TODO Auto-generated method stub
@@ -76,7 +75,6 @@ public class UserHibernate implements UserDAO{
 		return users;
 	}
 
-	@SuppressWarnings({ "deprecation", "unused" })
 	@Override
 	public boolean updateUser(User u) {
 		int rowsChanged = -1;

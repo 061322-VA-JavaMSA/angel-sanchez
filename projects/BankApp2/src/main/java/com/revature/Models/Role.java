@@ -15,11 +15,15 @@ public class Role {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
 	private int role_id;
 	
 	@Column(name="u_role")
 	private String role;
+
+	public Role() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public int getRole_id() {
 		return role_id;

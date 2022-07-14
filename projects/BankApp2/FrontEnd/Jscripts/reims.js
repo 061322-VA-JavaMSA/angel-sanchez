@@ -2,11 +2,12 @@ if (!principal) {
     window.location.href = "./index.html";
 }
 
-if (principal.role === 'Manager') {
-    let approveB = document.getElementById('approved');
-    approveB.style.display = 'inline';
-    let denyB = document.getElementById('denied');
-    denyB.style.display = 'inline';
+if (principal.role === 'Employee') {
+    document.getElementById('newReimbButton').style.visibility = 'visible';
+    document.getElementById('newReimbButton').style.display = 'inline';
+} else {
+    document.getElementById('newReimbButton').style.visibility = 'hidden';
+    document.getElementById('newReimbButton').style.display = 'none';
 }
 
 async function getReims() {
