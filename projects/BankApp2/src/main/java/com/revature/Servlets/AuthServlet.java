@@ -18,7 +18,6 @@ import com.revature.Services.AuthService;
 import com.revature.utils.CorsFix;
 
 public class AuthServlet extends HttpServlet{
-	private static final long serialVersionUID = 1L;
 	private AuthService as = new AuthService();
 	private ObjectMapper om = new ObjectMapper();
 

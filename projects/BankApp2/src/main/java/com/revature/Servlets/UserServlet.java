@@ -26,7 +26,6 @@ public class UserServlet extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private UserService us = new UserService();
 	// object to convert to JSON format
 	private ObjectMapper om = new ObjectMapper();
@@ -129,6 +128,13 @@ public class UserServlet extends HttpServlet {
 //		User u = om.readValue(reqBody, User.class);
 //		u.setId(id);
 //		HttpSession session = req.getSession();
-//		if()
+//		if(us.getUserById(req,res,id)) {
+//			
+//		}
 //	}
+	@Override
+	protected void doOptions(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException{
+		super.doOptions(req, res);
+		CorsFix.AddCorsHeader(req.getRequestURI(), res);
+	}
 }

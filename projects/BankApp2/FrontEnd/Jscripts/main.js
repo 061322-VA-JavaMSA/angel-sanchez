@@ -1,5 +1,5 @@
 // Because main.js is the first script added to each HTML page, the logic declared here is shared/reused by all pages
-let apiUrl = 'http://localhost:8080/BankApp2';
+let apiUrl = 'http://localhost:8080/BankApp2/';
 
 // When logged in, retrieves the JSON string representing the logged in user from Session Storage
 let principalString = sessionStorage.getItem('principal');

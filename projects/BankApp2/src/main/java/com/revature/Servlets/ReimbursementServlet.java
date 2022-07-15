@@ -52,6 +52,7 @@ public class ReimbursementServlet extends HttpServlet{
 				List<Reimbursement> reimb = rs.getReimbursementByAuthor(principal);
 				List<ReimbursementDTO> reimDTO = new ArrayList<>();
 				pw.write(om.writeValueAsString(reimDTO));
+				pw.close();
 			}else {
 				res.sendError(401, "Unauthorized");
 			}

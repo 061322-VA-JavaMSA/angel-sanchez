@@ -3,17 +3,18 @@ if(principal){
     window.location.href="./index.html";
 }
 
-// Setting up event listener for login button
-let loginButton = document.getElementById('submitButton');
-loginButton.addEventListener('click', login);
+// Setting up event listener for submit button
+let loginbutton = document.getElementById('submitButton');
+loginbutton.addEventListener('click', login);
+
+// let url = 'http://localhost:5432/p1/auth';
 
 // login function
 async function login(){
-
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    let response = await fetch(`${apiUrl}/auth`,{
+    let response = await fetch(`${apiUrl}/users/`,{
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -34,10 +35,10 @@ async function login(){
          */
          sessionStorage.setItem('principal', JSON.stringify(data));
          if(data.role === "Manager"){
-            window.location.href="/FrontEnd/Jscripts/manager_reim.html";
-         } else{
-        // redirect to the homepage on success
-        window.location.href="/FrontEnd/Jscripts/new_reim.html";
+            window.location.href="./manager_reim.html";
+         } else if(data.role === "Employee"){
+        // direct to employee reimbursement page upon succession
+        window.location.href="./new_reim.html";
          }
     } else{
         console.log('Unable to login.')

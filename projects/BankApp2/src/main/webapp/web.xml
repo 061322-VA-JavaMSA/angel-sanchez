@@ -7,6 +7,7 @@
 	<servlet>
 		<servlet-name>user-servlet</servlet-name>
 		<servlet-class>com.revature.servlets.UserServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>user-servlet</servlet-name>
@@ -15,6 +16,7 @@
 	<servlet>
 		<servlet-name>auth-servlet</servlet-name>
 		<servlet-class>com.revature.servlets.AuthServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>auth-servlet</servlet-name>
@@ -23,9 +25,10 @@
 	<servet>
 		<servlet-name>reimbursement-servlet</servlet-name>
 		<servlet-class>com.revature.ReimbursementServlet</servlet-class>
+		<load-on-startup>0</load-on-startup>
 	</servet>
 	<servlet-mapping>
 		<servlet-name>reimbursement-servlet</servlet-name>
-		<url-patter>/reimbursement/*</url-patter>
+		<url-pattern>/reimbursement/*</url-pattern>
 	</servlet-mapping>
 </web-app>
