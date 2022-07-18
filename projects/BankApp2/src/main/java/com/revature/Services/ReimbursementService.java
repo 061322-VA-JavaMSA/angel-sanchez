@@ -6,11 +6,19 @@ import java.util.List;
 
 import com.revature.DAO.ReimbursementDAO;
 import com.revature.DAO.ReimbursementHibernate;
+import com.revature.DAO.ReimbursementStatusDAO;
+import com.revature.DAO.ReimbursementStatusHibernate;
+import com.revature.DAO.UserDAO;
+import com.revature.DAO.UserHibernate;
+import com.revature.Exceptions.RNotUpdatedException;
+import com.revature.Models.R_status;
 import com.revature.Models.Reimbursement;
 import com.revature.Models.User;
 
 public class ReimbursementService {
 	private ReimbursementDAO rd = new ReimbursementHibernate();
+	private ReimbursementStatusDAO rsd = new ReimbursementStatusHibernate();
+	private UserDAO ud = new UserHibernate();
 	
 	public List<Reimbursement> getReimbursements() {
 		return rd.getReimbursement();
@@ -31,14 +39,19 @@ public class ReimbursementService {
 		return cr;
 	}
 	
-	public boolean updateReimbursement(Reimbursement r) throws IOException {
-		boolean a = rd.updateReimbursement(r);
-		return a;
+	public Reimbursement updateReimbursement(Reimbursement r) throws IOException {
+		return r;
 	}
 
-	public boolean setStatusById(int userID, int approverID, String string) {
+	public boolean setStatusById(int userID, int approverID, String status) throws RNotUpdatedException {
 		// TODO Auto-generated method stub
-		return false;
+		R_status rs = rsd.getReimbursementStatusById(approverID);
+		User u = ud.getUserById(approverID);
+		boolean update = (boolean) rd.setStatusById(userID, u, rs);
+		if(update == false) {
+			throw new RNotUpdatedException();
+		}
+		return update;
 	}
 
 	public Object getByID(int i) {

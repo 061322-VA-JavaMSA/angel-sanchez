@@ -7,14 +7,14 @@ if(principal){
 let loginbutton = document.getElementById('submitButton');
 loginbutton.addEventListener('click', login);
 
-// let url = 'http://localhost:5432/p1/auth';
+// let apiUrl = 'http://localhost:8080/BankApp';
 
 // login function
 async function login(){
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
 
-    let response = await fetch(`${apiUrl}/users/`,{
+    let response = await fetch(`${apiUrl}/auth`,{
         method: 'POST',
         credentials: 'include',
         headers: {
@@ -26,20 +26,24 @@ async function login(){
         })
     });
 
+
     if(response.status == 200){
         let data = await response.json();
-
+        sessionStorage.setItem('principal', JSON.stringify(data));
+        console.log(data.role);
         /*
             persisting the User object sent back to session storage for use in other pages
             Session Storage only allows persistence of Strings so the JS Object is converted to a JSON string using JSON.stringify
          */
-         sessionStorage.setItem('principal', JSON.stringify(data));
-         if(data.role === "Manager"){
-            window.location.href="./manager_reim.html";
-         } else if(data.role === "Employee"){
-        // direct to employee reimbursement page upon succession
-        window.location.href="./new_reim.html";
-         }
+        //  console.log('Submitted');
+        //  window.location.href="./manager_reim.html";
+        window.location.href="./manager_reim.html";
+        //  if(data.role === 'Manager'){
+        //     window.location.href="./manager_reim.html";
+        //  } else if(data.role == 'Employee'){
+        // // direct to employee reimbursement page upon succession
+        // window.location.href="./new_reim.html";
+        //  }
     } else{
         console.log('Unable to login.')
     }

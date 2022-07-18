@@ -18,13 +18,13 @@ public class ReimbursementDTO {
 	private R_type type;
 	
 	
-	public ReimbursementDTO(Reimbursement r ) {
+	public ReimbursementDTO(Reimbursement r) {
  		id = r.getId();
 		amount = r.getAmount();
 		submitted = r.getSubmitted();
 		resolved = (r.getResolved());
-		author = new UserDTO(r.getAuthor());
-		resolver = new UserDTO(r.getResolver());
+		author = new UserDTO();
+		resolver = new UserDTO();
 		status = r.getStatus_id(); //1 = Approve, 2 = Denied
 		type = r.getT_id(); //1 = LODGING, 2 = TRAVEL, 3 = FOOD, 4 = OTHER
 		description = r.getDescription();

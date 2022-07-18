@@ -22,19 +22,19 @@ u_role varchar(10)
 create table if not exists reimbursement(
 id serial primary key,
 amount int not null,
-submitted timestamp default current_timestamp not null, --YYYY-MM-DD hh-mm-ss format
+submitted timestamp default current_timestamp, --YYYY-MM-DD hh-mm-ss format
 resolved timestamp,
 description varchar(250),
 -- receipt blob, binary large object, a string datatype
 author int references users(user_id) not null,
 resolver int references users(user_id),
-status_id int references reimbursement_status(id) not null,
+status_id int references reimbursement_status(id),
 type_id int references reimbursement_type(id) not null
 );
 
 create table if not exists reimbursement_status(
-id serial primary key, 
-status varchar(10) not null -- APPROVE or DENY
+id int primary key, 
+status varchar(10) default 'pending'-- APPROVE or DENY
 );
 
 create table if not exists reimbursement_type(
@@ -66,3 +66,4 @@ insert into reimbursement (amount, description, author, status_id, type_id) valu
 insert into reimbursement (amount, description, author, status_id, type_id) values (814, 'Injury of cauda equina, subsequent encounter', 3, 1, 4);
 insert into reimbursement (amount, description, author, status_id, type_id) values (334, 'Adult failure to thrive', 2, 3, 3);
 insert into reimbursement (amount, description, author, status_id, type_id) values (619, 'Toxic effect of contact w venomous toad, acc, sequela', 4, 1, 2);
+insert into reimbursement (amount, description, author, status_id, type_id) values (1000, 'Europe', 4, 2, 2);

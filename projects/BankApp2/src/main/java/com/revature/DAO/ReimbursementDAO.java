@@ -8,9 +8,10 @@ import com.revature.Models.Reimbursement;
 import com.revature.Models.User;
 
 public interface ReimbursementDAO {
+	
 	Reimbursement insertReimbursement(Reimbursement r);
 	
-	boolean updateReimbursement(Reimbursement r) throws IOException;
+	Reimbursement updateReimbursement(Reimbursement r) throws IOException;
 	
 	List<Reimbursement> getReimbursement();
 	
@@ -20,6 +21,6 @@ public interface ReimbursementDAO {
 	
 	List<Reimbursement> getReimbursementByAuthor(User u);
 
-	Object setStatusById(int userID, User approverUser, R_status rs);
+	public boolean setStatusById(int userID, User approverUser, R_status rs);
 
 }

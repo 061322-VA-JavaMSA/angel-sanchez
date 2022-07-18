@@ -1,9 +1,13 @@
 // if no users are logged in/ user logged in is not admin, redirects to homepage 
-if(!principal || principal.role !== 'ADMIN'){
-    window.location.href="./index.html";
-}else{
-    getUsers();
-}
+// if(!principal || principal.role !== 'Manager'){
+//     window.location.href="./index.html";
+// }else{
+//     getUsers();
+// }
+let userButton = document.getElementById('data');
+userButton.addEventListener('click', getUsers);
+
+let apiUrl = 'http://localhost:8080/BankApp';
 async function getUsers(){
 
     let response = await fetch(`${apiUrl}/users`, {
@@ -30,7 +34,7 @@ function populateTable(data){
 
         tdId.innerHTML = user.id;
         tdUsername.innerHTML = user.username;
-        tdRole.innerHTML = user.role;
+        tdRole.innerHTML = user.role.role;
 
         tr.append(tdId);
         tr.append(tdUsername);
@@ -38,4 +42,12 @@ function populateTable(data){
 
         tableBody.append(tr);
     });
+}
+
+let homeButton = document.getElementById('home');
+homeButton.addEventListener('click', returnHome);
+
+
+function returnHome(){
+    window.location.href="./manager_reim.html";
 }

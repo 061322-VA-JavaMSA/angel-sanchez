@@ -3,32 +3,33 @@
 	xmlns="http://JAVA.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	
 	<display-name>BankApp</display-name>
 	<servlet>
-		<servlet-name>user-servlet</servlet-name>
-		<servlet-class>com.revature.servlets.UserServlet</servlet-class>
+		<servlet-name>users-servlet</servlet-name>
+		<servlet-class>com.revature.Servlets.UserServlet</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>user-servlet</servlet-name>
+		<servlet-name>users-servlet</servlet-name>
 		<url-pattern>/users/*</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>auth-servlet</servlet-name>
-		<servlet-class>com.revature.servlets.AuthServlet</servlet-class>
+		<servlet-class>com.revature.Servlets.AuthServlet</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>auth-servlet</servlet-name>
 		<url-pattern>/auth</url-pattern>
 	</servlet-mapping>
-	<servet>
-		<servlet-name>reimbursement-servlet</servlet-name>
-		<servlet-class>com.revature.ReimbursementServlet</servlet-class>
+	<servlet>
+		<servlet-name>reimb-servlet</servlet-name>
+		<servlet-class>com.revature.Servlets.ReimbursementServlet</servlet-class>
 		<load-on-startup>0</load-on-startup>
-	</servet>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>reimbursement-servlet</servlet-name>
+		<servlet-name>reimb-servlet</servlet-name>
 		<url-pattern>/reimbursement/*</url-pattern>
 	</servlet-mapping>
 </web-app>

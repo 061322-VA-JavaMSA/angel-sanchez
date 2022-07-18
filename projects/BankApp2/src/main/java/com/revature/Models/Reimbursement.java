@@ -1,8 +1,10 @@
 package com.revature.Models;
 
 import java.sql.Timestamp;
+
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,37 +22,38 @@ public class Reimbursement {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name="id")
 	private int id;
 	
-	@Column
+	@Column(name="amount")
 	private int amount;
 	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
+	@Column(name="submitted")
 	private Timestamp submitted;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column
+	@Column(name="resolved")
 	private Timestamp resolved;
 	
-	@Column
+	@Column(name="description")
 	private String description;
 	
-	@ManyToOne
-	@JoinColumn(name="author", insertable = true, updatable = false)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="author")
 	private User author;
 	
-	@ManyToOne
-	@JoinColumn(name="resolver", insertable = true, updatable = false)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="resolver")
 	private User resolver;
 	
-	@ManyToOne
-	@JoinColumn(name="status_id", insertable = true, updatable = true)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="status_id")
 	private R_status status_id;
 	
-	@ManyToOne
-	@JoinColumn(name="type_id", insertable = true, updatable = false)
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="type_id")
 	private R_type t_id;
 
 	public Reimbursement() {

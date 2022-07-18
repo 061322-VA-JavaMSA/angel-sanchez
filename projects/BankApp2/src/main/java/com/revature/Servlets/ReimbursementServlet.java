@@ -1,7 +1,7 @@
 package com.revature.Servlets;
 
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.DTO.ReimbursementDTO;
+import com.revature.Exceptions.RNotCreatedException;
 import com.revature.Exceptions.RNotFoundException;
 import com.revature.Models.R_status;
 import com.revature.Models.R_type;
@@ -32,82 +33,75 @@ public class ReimbursementServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		CorsFix.AddCorsHeader(req.getRequestURI(), res);
+		CorsFix.addCorsHeader(req.getRequestURI(), res);
 		res.addHeader("Content-Type", "application/json");
+		res.addHeader("Content-Type", "application/x-www-form-urlencoded");
 		String path = req.getPathInfo();
-		HttpSession session = req.getSession();
-		User principal = om.readValue(session.getAttribute("principal").toString(), User.class);
+//		HttpSession session = req.getSession();
+//		User principal = om.readValue(session.getAttribute("principal").toString(), User.class);
+
 		
-		List<Reimbursement> reimbursements = rs.getReimbursements();
+//		List<Reimbursement> reimbursements = rs.getReimbursements();
 		PrintWriter pw = res.getWriter();
-		pw.write(om.writeValueAsString(reimbursements));
+//		pw.write(om.writeValueAsString(reimbursements));
 		
 		if(path == null) { 
-			if(principal != null && principal.getRole().getRole().equals("Manager")) {
+//			if(principal != null && principal.getRole().getRole().equals("Manager")) {
 				List<Reimbursement> reims = rs.getReimbursements();
 				List<ReimbursementDTO> reimsDTO = new ArrayList<>();
+				reims.forEach(r -> reimsDTO.add(new ReimbursementDTO(r)));
+				
 				pw.write(om.writeValueAsString(reimsDTO));
-				pw.write(om.writeValueAsString(reims));
-			}else if(principal != null && principal.getRole().getRole().equals("Employee")) {
-				List<Reimbursement> reimb = rs.getReimbursementByAuthor(principal);
-				List<ReimbursementDTO> reimDTO = new ArrayList<>();
-				pw.write(om.writeValueAsString(reimDTO));
+//				pw.write(om.writeValueAsString(reims));
+//			}else if(principal != null && principal.getRole().getRole().equals("Employee")) {
+//				List<Reimbursement> reimb = rs.getReimbursementByAuthor(principal);
+//				List<ReimbursementDTO> reimDTO = new ArrayList<>();
+//				pw.write(om.writeValueAsString(reimDTO));
 				pw.close();
 			}else {
 				res.sendError(401, "Unauthorized");
 			}
 		}
-	}
+//	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		CorsFix.AddCorsHeader(req.getRequestURI(), res);
+		CorsFix.addCorsHeader(req.getRequestURI(), res);
 		res.addHeader("Content-Type", "application/json");
 		String path = req.getPathInfo();
 		HttpSession session = req.getSession();
-		User principal = om.readValue(session.getAttribute("principal").toString(), User.class);
-		System.out.println(principal);
+		InputStream reqB = req.getInputStream();
+//		User principal = om.readValue(session.getAttribute("principal").toString(), User.class);
+//		System.out.println(principal);
 		
-		if (path == null && principal != null && session.getAttribute("u_role").equals("Employee")) { //employee posting
-			RStatusService rss = new RStatusService();
-			RTypeService rts = new RTypeService();
-			try {
-				R_status status = rss.getStatus(3); //1 = approved, 2 = denied, 3 = pending
-				R_type type = rts.getTypeByName(req.getParameter("type"));
-				Timestamp submit = new Timestamp(System.currentTimeMillis());
-				int amount = Integer.parseInt(req.getParameter("amount"));
-				String description = req.getParameter("description");
-				Reimbursement newR = new Reimbursement();
-				newR.setAmount(amount);
-				newR.setAuthor(principal);
-				newR.setDescription(description);
-				newR.setSubmitted(submit);
-				newR.setT_id(type); //1 = LODGING, 2 = TRAVEL, 3 = FOOD, 4 = OTHER
-				newR.setStatus_id(status);
-				
-				rs.insertReimbursement(newR);
-				res.setStatus(201);
-			} catch (RNotFoundException e) {
-				e.printStackTrace();
-			}
-		}	else {
-			res.sendError(401, "Restricted Access.");
+			Reimbursement nr;
+			nr = om.readValue(reqB, Reimbursement.class);
+			rs.insertReimbursement(nr);
+			
+			res.setStatus(200);
 		}
-	}
 
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		CorsFix.AddCorsHeader(req.getRequestURI(), res);
+		CorsFix.addCorsHeader(req.getRequestURI(), res);
+		String info = req.getPathInfo();
+		InputStream reqB = req.getInputStream();
+		
 		Reimbursement r = om.readValue(req.getInputStream(), Reimbursement.class);
-		boolean updated = rs.updateReimbursement(r);
-
-		if(updated) {
-			res.setStatus(202);
-		} else {
-			res.setStatus(304);
+		int id = Integer.parseInt(info.substring(1));
+		rs.updateReimbursement(r);
+		
+		try {
+			ReimbursementDTO rDTO = new ReimbursementDTO(rs.getByID(id));
 		}
+
+//		if(r == "Approved" || r == "Denied") {
+//			res.setStatus(202);
+//		} else {
+//			res.setStatus(304);
+//		}
 	}
 
 	@Override

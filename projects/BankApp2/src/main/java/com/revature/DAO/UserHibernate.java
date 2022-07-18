@@ -6,6 +6,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.exception.ConstraintViolationException;
 
+import com.revature.Models.Reimbursement;
+import com.revature.Models.Role;
 import com.revature.Models.User;
 import com.revature.utils.HibernateUtil;
 
@@ -27,7 +29,7 @@ public class UserHibernate implements UserDAO{
 			u.setId(id);
 			tx.commit();
 		} catch(ConstraintViolationException e) {
-			//use log to log it
+
 		}
 		return u;
 	}
@@ -100,6 +102,23 @@ public class UserHibernate implements UserDAO{
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public List<User> getUserByRole(Role r) {
+		// TODO Auto-generated method stub
+		List<User> users = null;
+		try(Session s = HibernateUtil.getSessionFactory().openSession()){
+			CriteriaBuilder cb = s.getCriteriaBuilder();
+			CriteriaQuery<User> cq = cb.createQuery(User.class);
+			Root<User> root = cq.from(User.class);
+
+			Predicate pFromStatus = cb.equal(root.get("role"), r);
+			cq.select(root).where(pFromStatus);
+
+			users = s.createQuery(cq).list();
+		}
+		return users;
 	}
 
 }

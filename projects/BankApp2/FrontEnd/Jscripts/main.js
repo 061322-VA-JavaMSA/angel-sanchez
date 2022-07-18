@@ -1,5 +1,5 @@
 // Because main.js is the first script added to each HTML page, the logic declared here is shared/reused by all pages
-let apiUrl = 'http://localhost:8080/BankApp2/';
+let apiUrl = 'http://localhost:8080/BankApp';
 
 // When logged in, retrieves the JSON string representing the logged in user from Session Storage
 let principalString = sessionStorage.getItem('principal');
@@ -13,13 +13,13 @@ if (principalString) {
     // converts the JSON string back to a JS object and assigns it to principal
     principal = JSON.parse(principalString);
 
-    if (principal.role === 'Manager') {
-        createNavElement('Users', nav_left, './users.html', null);
-    }
+    // if (principal.role === 'Manager') {
+    createNavElement('Users', nav_left, './users.html', null);
 
     createNavElement('Reimbursements', nav_left, './reim.html', null);
 
     createNavElement('Logout', nav_right, null, logout);
+    // }
 } else {
     createNavElement('Login', nav_right, './Login.html', null);
 }
