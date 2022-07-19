@@ -1,0 +1,44 @@
+<!-- <h2>{{hero}}</h2> -->
+<!--interpolation data binding, only displays the hero name-->
+
+
+<!-- <h2>{{hero.name | uppercase}} Details</h2>
+<div><span>id: </span>{{hero.id}}</div> -->
+<!-- <div><span>name: </span>{{hero.name}}</div> -->
+<!--displays the hero name and id from hero.ts-->
+
+
+<!--Now edit the hero with two-way binding-->
+<!--The hero name will change when inputting a new name using the input tag and importing the FormModule in the app.module.ts-->
+<!-- <div>
+    <label for="name">Hero name: </label>
+    <input id="name" [(ngModel)]="hero.name" placeholder="name">
+</div> -->
+
+
+<h2>Some Heroes</h2>
+<ul class="heroes">
+  <li *ngFor="let hero of heroes"> 
+    <button [class.selected]="hero === selectedHero" type="button" (click)="onSelect(hero)">
+      <span class="badge">{{hero.id}}</span>
+      <span class="name">{{hero.name}}</span>
+    </button>
+  </li>
+</ul>
+
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<!-- ngFor is angular's repeater directive, repeats the host element for each element in a list-->
+<!-- Added an eventlistener to click button that displays the details of any hero that is clicked-->
+<!-- property binding[] to give the parent HeroesComponent control over the child HeroDetailComponent-->
+
+
+
+<!-- added the ngIf to wraps the hero details, Angular will render the section only when the sleectedHero is defined after it's selected by clicking on a hero-->
+<!-- <div *ngIf="selectedHero">
+    <h2>{{selectedHero.name | uppercase}} Details</h2>
+    <div>id: {{selectedHero.id}}</div>
+    <div>
+      <label for="hero-name">Hero name: </label>
+      <input id="hero-name" [(ngModel)]="selectedHero.name" placeholder="name">
+    </div>
+  </div> -->
