@@ -92,11 +92,6 @@ public class ReimbursementServlet extends HttpServlet{
 		Reimbursement r = om.readValue(req.getInputStream(), Reimbursement.class);
 		int id = Integer.parseInt(info.substring(1));
 		rs.updateReimbursement(r);
-		
-		try {
-			ReimbursementDTO rDTO = new ReimbursementDTO(rs.getByID(id));
-		}
-
 //		if(r == "Approved" || r == "Denied") {
 //			res.setStatus(202);
 //		} else {
