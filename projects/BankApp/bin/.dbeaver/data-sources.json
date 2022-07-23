@@ -14,6 +14,10 @@
 				"url": "jdbc:postgresql://bank-app.cxk7mmlgp26b.us-east-1.rds.amazonaws.com:5432/postgres",
 				"home": "postgresql-x64-10",
 				"type": "dev",
+				"properties": {
+					"connectTimeout": "20",
+					"loginTimeout": "20"
+				},
 				"provider-properties": {
 					"@dbeaver-show-non-default-db@": "false",
 					"@dbeaver-show-template-db@": "false",
