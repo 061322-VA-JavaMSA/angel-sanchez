@@ -49,7 +49,7 @@
 
 ## Spring MVC
 1.	Explain the MVC architecture and how HTTP requests are processed in the architecture.
-- The Spring Web MVC framework is made up of models, views, and controllers. By the flow of a request, when a client makes a request it is received by Tomcat in which it turns into an HttpServletRequest object and generates an HttpServletResponse. Next, the web.xml and context path are checked, routes the request to the DispatcherServlet, the HandlerMapper is checked, and sends the request to the  relevant controller to be handled.
+- The Spring Web MVC framework is made up of models, views, and controllers. By the flow of a request, when a client makes a request it is received by Tomcat in which it turns into an HttpServletRequest object and generates an HttpServletResponse. Next, the web.xml and context path are checked, routes the request to the DispatcherServlet, the HandlerMapper is checked, and sends the request to the relevant controller to be handled.
 
 2.	What is the role of the DispatcherServlet? What about the ViewResolver?
 - The DispatcherServlet handles all HTTP requests and responses. The ViewResolver picks up the defined view for the request.
@@ -58,7 +58,7 @@
 - By using the @ annotation before mapping the specific request you want to make.
 
 4.	What is the difference between @RequestMapping and @GetMapping?
-- *@RequsetMapping* specifies the common path for all controller methods, either it'll be HTTP verbs or url mapping that is assigned to a method to handle. *@GetMapping* specifies the HTTP verb for a method, i.e. the GET method.
+- *@RequestMapping* specifies the common path for all controller methods, either it'll be HTTP verbs or url mapping that is assigned to a method to handle. *@GetMapping* specifies the HTTP verb for a method, i.e. the GET method.
 
 5.	How to declare the data format your controller expects from requests or will create in responses?
 - Using annotations such as @GetMapping, @PutMapping, @PostMapping, and @Delete.
