@@ -1,0 +1,6 @@
+Thank you Glenn. Good Afternoon Everyone! My name is Angel Sanchez. Today I will speak about our project requirements and to build upon what Glenn said, we were assigned numerous tasks throughout the entire project. However, for a Social Media Website we were required to write some typical User features that would be in any Socia Media Website. These features were Users must be able to view and "like" other User's posts, Users may "follow" other Users, Users can search for each other, they can updated their personal account information and profile picture, and finally, Users will get notified everytime another User "follows" them or "likes" their post. All the while, our project must achieve at least 70% code coverage for our front and back end development. Thank you everyone for your time, I will now pass on the presentation to Kevin G to speak about our Scrum Teams.
+
+## Stretch Goals, not completed due to time and testing
+- Implement Dark Mode feature
+- Bookmark other user's posts
+- Utilize YouTube links in post
