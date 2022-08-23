@@ -9,5 +9,8 @@ What is LinkedList?
 -  A node based data structure, 0 -> o, etc.
 
 What is Iterator and Iterable interface?
+- 
 
 What is Comparable and Comparator interface?
+- 
+
